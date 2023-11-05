@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon vet'dashboard{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <h1 class="text-center">Mon Dashboard</h1>
+
+        {% if veto.agenda is null %}
+            <h3 class="text-center">Vous n'avez pas de planning, commencez par en créer un !</h3>
+            <a href="{{ path('app_planning_create') }}" class="btn btn-primary">Créer mon planning</a>
+        {% else %}
+            <a href="{{ path('app_planning_edit', {id: veto.agenda.id}) }}" class="btn btn-primary">Éditer mon planning</a>
+            <a class="btn btn-danger" href="{{ path('app_planning_delete', {id: veto.agenda.id}) }}">Supprimer le planning</a>
+        {% endif %}
+
+
+        {% if current is not null %}
+
+            <div class="d-flex gap-2">
+                <div class="flex-grow-1 d-flex flex-column p-4 rounded-2" style="border: 1px solid;">
+                    <h3>Rendez-vous #{{ current.appointment.id }} ({{ current.appointment.dateApp|format_time }} à {{ current.appointment.dateEnd|format_time }})</h3>
+
+                    {{ form_start(note_form, {'attr': {'class': 'd-flex flex-column flex-grow-1'}}) }}
+                    {{ form_widget(note_form, {'attr': {'class': 'flex-grow-1'}}) }}
+                    <div class="d-flex justify-content-end pt-3">
+                        <input type="submit" class="btn btn-primary" value="Modifier la note">
+                    </div>
+                    {{ form_end(note_form) }}
+                    <hr>
+                    {{ form_start(buttons_form) }}
+                    {{ form_widget(buttons_form, { 'attr': {'class': 'd-flex justify-content-between my-3'} }) }}
+                    {{ form_end(buttons_form) }}
+                </div>
+                {{ include('_animal_card.html.twig', {'animal': current_animal, 'client': current_client}) }}
+            </div>
+        {% endif %}
+        <hr>
+        {% if appointments is not empty %}
+            <h3>Liste des rendez-vous</h3>
+            <ul class="list-group">
+                {% for i, a in appointments %}
+                    <li class="list-group-item">
+
+                        {% if a.appointment.isUrgent %}
+                            <span class="badge bg-warning rounded-pill">Urgent</span>
+                        {% endif %}
+
+                        {% if a.appointment.isCompleted %}
+                            <span class="badge bg-success rounded-pill">Completed</span>
+                        {% elseif i == 0 %}
+                            <span class="badge bg-info rounded-pill">Actuel</span>
+                        {% else %}
+                            <span class="badge bg-secondary rounded-pill">En attente</span>
+                        {% endif %}
+
+                        {{ a.appointment.dateApp|format_time }} - {{ a.appointment.dateEnd|format_time }} / {{ a.animal_type }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3 class="text-center text-secondary ">Pas de rendez-vous aujourd'hui</h3>
+        {% endif %}
+    </div>
+{% endblock %}

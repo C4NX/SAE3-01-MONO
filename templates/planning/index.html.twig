@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des planning{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <h1 class="text-center">Liste des Plannings</h1>
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Informations</th>
+                <th>Planning</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for veto in vets %}
+                <tr>
+                    <td style="vertical-align: middle">
+                        {% if veto.profilePicPath is not null %}
+                            <img src="{{ asset('uploads/avatars/' ~ veto.profilePicPath) }}" alt="avatar" width="32" class="rounded-circle">
+                        {% else %}
+                            <img src="{{ asset('media/default-avatar.png') }}" alt="avatar" width="32" class="rounded-circle">
+                        {% endif %}
+                        Dr {{ veto.lastName|upper }} {{ veto.firstName }}
+                    </td>
+                    <td style="vertical-align: middle">
+                        <p><i class="fa-solid fa-envelope"></i> Email: <a href="mailto://{{ veto.email }}">{{ veto.email }}</a></p>
+                        <p><i class="fa-solid fa-phone"></i> Téléphone:
+                            {% if veto.tel is not null %}
+                                <a href="tel:{{ veto.tel }}">{{ veto.tel }}</a>
+                            {% else %}
+                                [Non renseigné]
+                            {% endif %}
+                        </p>
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        {% if veto.agenda is not null %}
+                            <a class="btn btn-outline-success" href="{{ path('app_planning_show', {id: veto.agenda.id}) }}"><i class="fa-solid fa-eye"></i> Voir le Planning</a>
+                        {% else %}
+                            <a class="btn btn-outline-success disabled">Pas encore de Planning</a>
+                        {% endif %}
+                </tr>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

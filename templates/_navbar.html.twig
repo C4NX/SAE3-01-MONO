@@ -1,0 +1,54 @@
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 border-bottom">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <img src="{{ asset('media/nav_logo.png') }}" width="40">
+        Take'A'Vet
+    </a>
+
+    <div class="d-flex flex-row collapse flex-wrap m-lg-2">
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center align-items-center mb-md-0">
+            <li><a href="/" class="nav-link px-2 link-secondary">Accueil</a></li>
+            <li><a href="{{ path('app_planning') }}" class="nav-link px-2 link-dark">Planning</a></li>
+            <li><a href="{{ path('app_threads') }}" class="nav-link px-2 link-dark">FAQ</a></li>
+            <li><a href="/contact" class="nav-link px-2 link-dark">Contact</a></li>
+            {% if app.user is not null and app.user.veto %}
+                <li><a href="{{ path('app_record_create') }}" class="nav-link px-2 link-dark">Créer un récap</a></li>
+            {% endif %}
+            {% if app.user is not null and app.user.client %}
+                <li><a href="{{ path('app_animal') }}" class="nav-link px-2 link-dark"><i class="fa-solid fa-paw"></i>
+                        Mes animaux</a></li>
+                <li><a href="{{ path('app_address') }}" class="nav-link px-2 link-dark"><i
+                                class="fa-solid fa-house-user"></i> Mes adresses</a></li>
+                <li><a href="{{ path('app_appointments') }}" class="nav-link px-2 link-dark"><i class="fa-solid fa-list"></i> Mes rendez-vous</a></li>
+            {% endif %}
+        </ul>
+
+        <div class="d-flex align-items-center flex-grow-1 justify-content-evenly gap-3 mx-3">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                {% if app.user.veto %}
+                    <a href="{{ path('app_dashboard') }}" class="btn btn-primary"><i class="fa-solid fa-paw"></i> Mon Dashboard</a>
+                {% endif %}
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('admin') }}" class="btn btn-danger me-2">Menu admin <i class="fa-solid fa-sliders"></i></a>
+                {% endif %}
+
+                <a href="{{ path('app_logout') }}" class="btn btn-outline-danger me-2">Déconnexion</a>
+
+                <a href="{{ path('app_me') }}">
+                    {% if app.user.profilePicPath is not null %}
+                        <img src="{{ asset('uploads/avatars/' ~ app.user.profilePicPath) }}" alt="avatar" height="45"
+                        class="rounded-circle" loading="lazy">
+                    {% else %}
+                        <img src="{{ asset('media/default-avatar.png') }}" alt="avatar" height="45"
+                        class="rounded-circle" loading="lazy">
+                    {% endif %}
+                </a>
+            {% else %}
+                <a href="{{ path('app_register') }}" class="btn btn-primary">Créer un compte</a>
+                <a href="{{ path('app_login') }}" class="btn btn-outline-primary me-2">Se connecter</a>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+</header>

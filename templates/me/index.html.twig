@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <h1 class="text-center">Mon compte</h1>
+        <div class="d-flex m-3">
+            <div class="m-2">
+                <h2>Mon Avatar</h2>
+                {% if app.user.profilePicPath is not null %}
+                    <img src="{{ asset('uploads/avatars/' ~ app.user.profilePicPath) }}" alt="avatar" width="258"class="rounded-circle">
+                {% else %}
+                    <img src="{{ asset('media/default-avatar.png') }}" alt="avatar" width="258" class="rounded-circle">
+                {% endif %}
+
+                {{ form_start(avatarChangeForm) }}
+                {{ form_widget(avatarChangeForm) }}
+                <input class="btn btn-primary" type="submit" value="Changer">
+                {{ form_end(avatarChangeForm) }}
+
+            </div>
+            <div class="flex-grow-1">
+                <div class="m-2">
+                    <h2>Mes Informations</h2>
+                    {{ form_start(userInfoChangeForm) }}
+
+                    {{ form_widget(userInfoChangeForm) }}
+                    <input class="btn btn-primary" type="submit" value="Mettre à jour les informations">
+                    {{ form_end(userInfoChangeForm) }}
+                </div>
+                <hr>
+                <div class="m-2">
+                    <h2>Changer le mot de passe</h2>
+                    {{ form_start(passwordChangeForm) }}
+
+                    {% if password_error is defined %}
+                        <div class="alert alert-danger">{{ password_error }}</div>
+                    {% elseif password_success is defined %}
+                        <div class="alert alert-success">{{ password_success }}</div>
+                    {% endif %}
+
+                    {{ form_widget(passwordChangeForm) }}
+                    <input class="btn btn-primary" type="submit" value="Changer le mot de passe">
+                    {{ form_end(passwordChangeForm) }}
+                </div>
+                <p class="text-end">
+                    <a href="{{ path('app_me_delete') }}" class="btn btn-danger">Supprimer votre compte</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

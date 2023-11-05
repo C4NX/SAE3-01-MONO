@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Création d'un nouveau récap
+{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <h1>Création d'un nouveau récap</h1>
+
+        {{ include('record_animal/_form.html.twig', {label_submit: "créer", with_context: false, form: form}) }}
+    </div>
+
+{% endblock %}
+

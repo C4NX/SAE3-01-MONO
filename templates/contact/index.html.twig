@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Take'A'Vet - Mes animaux{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <div class="main-title">
+            <h1 class="title_contact">Contacter le service</h1>
+        </div>
+        <div class="main-content__home">
+            <div class="contact_networks_icones">
+                <div class="contact_main">
+                    <div class="contact_contacting">
+                        <form>
+                            <div>
+                                <div class="main-title">
+                                    <h3>Nous contacter</h3>
+                                    <p>Merci de nous envoyer un mail a cette adresse <a href="mailto: contact@takea.vet">contact@takea.vet</a>, si vous avez des questions ou des problèmes sur le service.</p>
+                                </div>
+                                <div class="form">
+                                    <div class="form-group">
+                                        <label for="subject">Sujet (*)</label>
+                                        <input type="text" class="form-control" id="subject" placeholder="Sujet : Salut Take'A'Vet !">
+                                        <small id="indication" class="form-text text-muted">(*) Les champs marqués d'une étoile sont obligatoires.</small>
+                                        <textarea type="text" class="form-control" id="message" placeholder="Votre message..."></textarea>
+                                        <button type="button" class="btn btn-primary button_form" id="btn_contact" onclick="contact_mail_open()">Envoyer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="networks_icones">
+                    <h5 class="title_form">Réseaux sociaux</h5>
+                    <div class="networks_icones__icones">
+                        <a href="https://www.facebook.com/takeavet/" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                        <a href="https://www.instagram.com/takeavet/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/takeavet" target="_blank"><i class="fab fa-twitter-square"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="networks_main">
+                <h5>Où nous trouver?</h5>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2604.10167310515!2d4.03153917619462!3d49.2555187726778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e975ad3ce7cfd1%3A0x6e49dffffc187bf8!2sPlace%20Royale!5e0!3m2!1sfr!2sfr!4v1672841099021!5m2!1sfr!2sfr" width="300" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="line_under_iframe"></div>
+                <div class="address_takeavet">
+                    <p style="font-weight: bold">Take'A'Vet</p>
+                    <p>Groupe Vétérinaire Take'A'Vet</p>
+                    <p><i style="color: gray">8 Allée de la Pacific
+                    <br>Numéro 58
+                    <br>Code postal : 51000</i></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

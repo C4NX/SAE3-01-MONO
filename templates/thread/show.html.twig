@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Take'A'Vet - Thread#{{ thread.id }}
+{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+
+        {% if is_thread_admin %}
+            {{ form_start(buttonsForm) }}
+            {{ form_widget(buttonsForm) }}
+            {{ form_end(buttonsForm) }}
+        {% endif %}
+
+        <h2 class="m-3">
+            <span class="thread__tag">Thread #{{ thread.id }}:</span>
+            {{ thread.lib }}
+            {% if thread.resolved %}
+                <span class="badge text-bg-info">Question résolue</span>
+            {% endif %}
+        </h2>
+
+        <p class="thread__description">
+            {{ thread.message }}
+        </p>
+        <div class="flex-grow-1">
+            <section class="thread__messages_list">
+                {% for i, msg in messages %}
+                    <div class="thread__messages_item {{ msg.user.isVeto() ? 'thread__messages_item_promote' : '' }}">
+
+                        {% if msg.user.profilePicPath is not null %}
+                            <img src="{{ asset('uploads/avatars/' ~ msg.user.profilePicPath) }}" alt="avatar" height="45" class="rounded-circle" loading="lazy">
+                        {% else %}
+                            <img src="{{ asset('media/default-avatar.png') }}" alt="avatar" height="45" class="rounded-circle" loading="lazy">
+                        {% endif %}
+
+                        <div class="flex-grow-1">
+                            <p class="thread__messages_item_message">{{ msg.message }}</p>
+                            <p class="thread__messages_item_author">{{ msg.createdAt|date('d/m/Y') }} | {{ msg.user.lastName }} {{ msg.user.firstName }}</p>
+                        </div>
+
+                        <p>#{{ i+1 }}</p>
+                    </div>
+                {% endfor %}
+            </section>
+            <section>
+                {{ form_start(replyForm) }}
+                {{ form_widget(replyForm) }}
+                <input type="submit" class="btn btn-primary" value="Répondre">
+                {{ form_end(replyForm) }}
+            </section>
+        </div>
+    </div>
+{% endblock %}
+

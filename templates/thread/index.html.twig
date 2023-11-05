@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Take'A'Vet - F.A.Q
+{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <div class="main-title">
+            <h1>F.A.Q</h1>
+            <p>Bienvenue sur la foire aux questions de take'a'vet. Vous pouvez poser vos questions ici, et des
+                vétérinaires du site ainsi que les utilisateurs pourront vous fournir des réponses.</p>
+            <p>
+                Voici quelques règles pour les questions :
+            <ol>
+                <li>Soyez respectueux envers les autres membres.</li>
+                <li>Gardez les discussions en lien avec les animaux.</li>
+                <li>Ne publiez pas de contenu illégal ou inapproprié.</li>
+                <li>Respectez les droits d'auteur et ne publiez pas de contenu sans autorisation.</li>
+                <li>Ne publiez pas de spam ou de publicités non sollicitées.</li>
+            </ol>
+            </p>
+        </div>
+
+        <form class="row m-2 w-100 justify-content-center align-items-center">
+            <div class="col-auto">
+                <label>Page: {{ page }} / {{ pages_count }}</label>
+            </div>
+            <div class="col-auto">
+                <input class="form-control" type="search" name="search"
+                        {% if search is defined %}
+                            value="{{ search }}"
+                        {% endif %}
+                >
+            </div>
+            <div class="col-auto">
+                <button class="form-control" type="submit">Rechercher</button>
+            </div>
+            <a href="{{ path('app_threads_form') }}" class="btn btn-secondary col-auto">Ajouter une question ici</a>
+        </form>
+
+        <section class="thread__messages_list">
+
+            {% if threads is empty %}
+                <div class="thread__item">
+                    <h4>Pas de résultat.</h4>
+                </div>
+            {% endif %}
+
+            {% for thread in threads %}
+                <div class="thread__item">
+                    <h4>{{ thread.lib }}</h4>
+                    <p>{{ thread.message|u.truncate(150, '...') }}
+                        <span class="badge bg-primary rounded-pill">{{ thread.count }} réponses</span>
+                        {% if thread.resolved %}
+                            <span class="badge bg-success rounded-pill">Question résolue</span>
+                        {% endif %}
+                    </p>
+                    <p class="thread__messages_item_author">{{ thread.createdAt|date('d-m-Y') }} | {{ thread.name }}</p>
+                    <div class="mt-2">
+                        <a class="btn btn-primary" href="{{ path('app_threads_show', {'id':  thread.id}) }}">Voir le
+                            message</a>
+                        <a class="btn btn-outline-primary"
+                           href="{{ path('app_threads_show', {'id': thread.id}) ~ '#thread_reply_form' }}">Répondre</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item
+
+                        {% if page == 0 %}
+                            disabled
+                        {% endif %}
+                        ">
+                    <a class="page-link" href="?page={{ page-1 }}" tabindex="-1">Précédent</a>
+                </li>
+                {% for i in range(max(0,min(pages_count, page-2)), min(pages_count, page+2)) %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endfor %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page+1 }}">Suivant</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

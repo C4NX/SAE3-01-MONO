@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Adresses{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <h1 class="text-center">Mes adresses</h1>
+        {% if addresses|length == 0 %}
+            <p class="text-center">Vous n'avez aucune adresse enregistrée sur ce site, créez-en une maintenant !</p>
+        {% else %}
+            <h4 class="text-center">Vous avez {{ addresses|length }} adresse(s) enregistrée(s) sur ce site.</h4>
+        {% endif %}
+        {% if addresses is not empty %}
+            <div class="address__list">
+                {% for ad in addresses %}
+                    <div class="address__item">
+                        <p><strong>{{ ad.name }}</strong></p>
+                        <p>{{ ad.ad }}, {{ ad.pc }} {{ ad.city }}</p>
+                        <p class="address__links">
+                            <a class="btn btn-primary" href="{{ path('app_address_update', {id: ad.id}) }}">Changer</a>
+                            <a class="btn btn-danger" href="{{ path('app_address_delete', {id: ad.id}) }}">Supprimer</a>
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="m-3">
+            <h4 class="text-center">Ajouter une adresse</h4>
+            <p class="text-center" style="margin-bottom: 0"><i>France uniquement</i></p>
+            {{ form_start(create_form) }}
+            {{ form_widget(create_form) }}
+            <input class="btn btn-primary" type="submit" value="Ajouter">
+            {{ form_end(create_form) }}
+        </div>
+    </div>
+{% endblock %}

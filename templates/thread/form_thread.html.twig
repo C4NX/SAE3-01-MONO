@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Soumettre une question
+{% endblock %}
+
+{% block main %}
+    <div class="main-content col-row-responsive" style="padding-top: 50px; padding-bottom: 150px;">
+        <div class="main-title">
+            <h1 class="form_titles">Soumettre une question</h1>
+            <p class="form-p">Pour pouvoir proposer une question à l'un de nos vétérinaires, veuillez remplir ce formulaire.</p>
+        </div>
+        <div class="flex-grow-1">
+            {{ form_start(form) }}
+            {{ form_widget(form)  }}
+            <div class="form-end">
+                <small id="indication" class="form-text text-muted">(*) Les champs marqués d'une étoile sont obligatoires.</small>
+                <button type="submit" class="btn btn-primary button_form">Soumettre ma question</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

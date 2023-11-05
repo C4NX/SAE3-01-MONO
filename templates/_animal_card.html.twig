@@ -1,0 +1,25 @@
+<div class="card" style="width: 18rem;">
+    {% if animal.photoPath is null %}
+        <img src="https://placehold.co/200x200?text=Pas de photo" class="card-img-top" alt="animal">
+    {% else %}
+        <img src="{{ asset('uploads/animals/' ~ animal.photoPath) }}" class="card-img-top" alt="animal">
+    {% endif %}
+
+    <div class="card-body">
+        <h5 class="card-title">{{ animal.name }}</h5>
+        <p class="card-text{% if animal.note is empty %} text-secondary{% endif %}">{{ animal.note|default('<Pas de note>') }}</p>
+        <p>
+            <strong>Propriétaire:</strong> {{ client.lastName|upper }} {{ client.firstName }}
+        </p>
+        <p>
+            <strong>Téléphone (Client):</strong> <span
+                    class="{% if client.tel is null %}text-secondary{% endif %}">{{ client.tel|default('<Rien>') }}</span>
+        </p>
+        <p><strong>Vaccins:</strong></p>
+        <ul>
+            {% for v in animal.vaccines %}
+                <li>{{ v.name }} (Fait le <i>{{ v.datenext|format_date }}</i>, prochain le <i>{{ v.datenext|format_date }})</i></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

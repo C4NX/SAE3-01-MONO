@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Planning de {{ agenda.veto.lastName|upper }} {{ agenda.veto.firstName }}
+{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <div class="text-center">
+            {% if agenda.veto.profilePicPath is not null %}
+                <img src="{{ asset('uploads/avatars/' ~ agenda.veto.profilePicPath) }}" alt="avatar" height="128"
+                class="rounded-circle" loading="lazy">
+            {% else %}
+                <img src="{{ asset('media/default-avatar.png') }}" alt="avatar" height="128"
+                class="rounded-circle" loading="lazy">
+            {% endif %}
+            <h1>Planning de {{ agenda.veto.lastName|upper }} {{ agenda.veto.firstName }}</h1>
+        </div>
+
+        <hr>
+
+        <div class="text-center">
+            <div class="container py-5">
+                <h3 class="text-primary">Horaires, du {{ firstDayOfWeek|format_date }} au {{ lastDayOfWeek|format_date }} </h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        {% for day in agenda.days %}
+                            {% set dateDay = ("Sunday + #{day.day} days"|date("U")) %}
+                            {% set startDayString = dateDay|format_datetime(pattern="EEEE", locale='fr')|capitalize %}
+                            <th scope="col">{{ startDayString }} | {{ dateDay|format_date }}</th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        {% for day in agenda.days %}
+                            <td>
+                                Rendez-vous possible de <i>{{ day.startHour|date('H:i') }}h</i> à  <i>{{ day.endHour|date('H:i') }}h</i>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                    {% for day in agenda.days %}
+                        <td>
+                            {% set dateDay = ("Sunday + #{day.day} days"|date("U")) %}
+
+                            {% set hasAppInTd = false %}
+
+                            <ul class="list-group list-group-flush">
+                            {% for a in appointments %}
+                                {% if a.dateApp|date('D') == dateDay|date('D') %}
+                                    <li class="list-group-item">{{ a.dateApp|date }}</li>
+                                    {% set hasAppInTd = true %}
+                                {% endif %}
+                            {% endfor %}
+                            </ul>
+
+                            {% if not hasAppInTd %}
+                                <p>X</p>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+                <h3 class="text-primary">Absences</h3>
+                {% if unavailabilities is not empty %}
+                    <ul>
+                        {% for u in unavailabilities %}
+                            <li>{{ u.lib }} - {{ u.dateDeb|format_datetime }} {{ u.dateEnd|format_datetime }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-secondary" style="text-align: center;">Il n'y a aucune absence signalée pour la semaine en cours.</p>
+                {% endif %}
+                <div class="d-flex" style="justify-content: space-around; align-items: center;">
+                    <a class="btn btn-outline-primary" href="?offset={{ weekOffset-1 }}"><i class="fa-sharp fa-solid fa-arrow-left"></i></a>
+                    <p style="margin-bottom: 0;" class="text-secondary">Semaine: {{ (weekOffset > 0 ? '+' : '') ~ weekOffset }}</p>
+                    <a class="btn btn-outline-primary" href="?offset={{ weekOffset+1 }}"><i class="fa-sharp fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <hr>
+
+            <h3>Mes Vacances</h3>
+
+            {% if vacations is not empty %}
+                <ol>
+                    {% for vacation in vacations %}
+                        <li>{{ vacation.libVacation }} - {{ vacation.dateStart|format_datetime("full", "none", locale='fr') }} à {{ vacation.dateStart|format_datetime("full", "none", locale='fr') }}</li>
+                    {% endfor %}
+                </ol>
+            {% else %}
+                <p class="text-secondary" style="text-align: center;">{{ agenda.veto.displayName }} n'a pas encore de vacances enregistrés.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+

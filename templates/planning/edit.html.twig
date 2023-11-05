@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Edit'Planning
+{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <h1 class="text-center">Edition de votre planning</h1>
+        <hr>
+        <h3 class="mx-3">Mon Planning</h3>
+        <div class="d-flex align-items-center gap-4">
+            <i class="fa-solid fa-arrow-right-long"></i>
+            <div class="d-flex flex-column gap-2">
+                <div>
+                    <h4>Vacances ({{ agenda.vacations|length }})</h4>
+                    <ul>
+                        {% for v in agenda.vacations %}
+                            <li>{{ v.libVacation }} <a class="text-danger" href="{{ path('app_vacation_delete', {id: v.id}) }}"><i class="fa-solid fa-xmark"></i></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div>
+                    <h4>Absences ({{ agenda.unavailabilities|length }})</h4>
+                    <ul>
+                        {% for u in agenda.unavailabilities %}
+                            <li>{{ u.lib }} - {{ u.dateDeb|format_datetime }} / {{ u.dateEnd|format_datetime }} {{ u.isRepeated ? '<span class="badge text-bg-info">@Semaine</span>' : '' }} <a class="text-danger" href="{{ path('app_unavailability_delete', {id: u.id}) }}"><i class="fa-solid fa-xmark"></i></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        {% if success is defined and success %}
+            <div class="alert alert-success" role="alert">
+                L'opération a été un succès, vous pouvez faire un tour sur le <a class="alert-link" target="_blank" href="{{ path('app_planning_show', {id: agenda.id}) }}">planning</a>.
+            </div>
+        {% endif %}
+
+        <div class="m-3 d-flex flex-column gap-3">
+            <div>
+                <h3>Saisie des vacances</h3>
+                {{ form_start(vacation_add_form) }}
+                {{ form_widget(vacation_add_form) }}
+                <input type="submit" class="btn btn-primary" value="Ajouter">
+                {{ form_end(vacation_add_form) }}
+            </div>
+            <hr>
+            <div class="d-flex gap-4 col-row-responsive">
+                <div class="flex-grow-1 d-flex flex-column">
+                    <h3>Saisie des absences <span class="badge bg-secondary">Unique</span></h3>
+
+                    {{ form_start(unavailability_add_form) }}
+                    {{ form_widget(unavailability_add_form) }}
+                    <input type="submit" class="btn btn-primary" value="Ajouter">
+                    {{ form_end(unavailability_add_form) }}
+                </div>
+                <div class="flex-grow-1">
+                    <h3>Saisie des absences <span class="badge bg-secondary">Semaine</span></h3>
+
+                    {{ form_start(unavailability_add_repeated_Form) }}
+                    {{ form_widget(unavailability_add_repeated_Form) }}
+                    <input type="submit" class="btn btn-primary" value="Ajouter">
+                    {{ form_end(unavailability_add_repeated_Form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

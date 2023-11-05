@@ -1,0 +1,47 @@
+<div class="main-content">
+        <div>
+            <h1 class="title">Mes animaux</h1>
+            {% if animals is empty %}
+                <p style="text-align: center">Vous n'avez pas encore d'animal, cliquez sur le bouton du dessus !</p>
+            <p style="text-align: center">
+            </p>
+            {% else %}
+            <ul class="list_animal">
+                {% for animal in animals  %}
+                <div class="list_animal_item">
+                    {% if animal.photoPath is not null %}
+                        <div class="text-center">
+                            <img class="img-small" src="{{ asset('uploads/animals/' ~ animal.photoPath) }}" />
+                        </div>
+                    {% endif %}
+                    <div class="text-center">
+                        <h4 class="animal_name">{{animal.name}}, {{ animal.CategoryAnimal.name}} {{animal.race}} </h4>
+                    </div>
+                    <p class="text-center">{{ animal.birthday| format_date }}, {{ date().diff(date(animal.birthday)).y }} ans</p>
+
+                    <div class="my-2">
+                        <h4>Les vaccins: </h4>
+                        <ul class="list-group">
+                            {% for v in animal.vaccines %}
+                                <li class="list-group-item">{{ v.name }} ({{ v.datecurrent|format_date }}), Prochain le {{ v.datenext|format_date }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="my-2">
+                        <h4>Note de cette animal: </h4>
+                        <textarea class="form-control my-3"> {{ animal.note }} </textarea>
+                    </div>
+
+                    <div class="animal_part">
+                        <p class="animal_button"><a class="btn btn-success" href="{{ path('app_animal_update', {id: animal.id}) }}" role="button"> Modifier cet animal</a> </p>
+                        <p class="animal_button"><a class="btn btn-danger" href="{{ path('app_animal_delete', {id: animal.id}) }}" role="button"> Supprimer cet animal</a></p>
+                        <p class="animal_button"><a class="btn btn-success" href="{{ path('app_record_animal', {id: animal.id}) }}" role="button"> Accéder aux derniers récap !</a></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <p style="text-align: end;"><a class="btn btn-primary" href="{{ path('app_animal_create') }}" role="button"> Ajouter un nouvel animal</a></p>
+        </div>
+    </div>

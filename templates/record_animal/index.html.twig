@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Take'A'Vet - Mes animaux!{% endblock %}
+
+{% block main %}
+    <main>
+    <div class="main-content">
+        <div class="main-content__home">
+            <h1 class="title">Derniers récapitulatifs de {{ animal.name }}</h1>
+        </div>
+        {% if records is empty %}
+        <p style="text-align: center"> Il n'y a pas encore de récapitulatif de rendez vous.</p>
+        {% else %}
+        <ul class="list_animal">
+            {% for record in records %}
+                <p class="title">Récap du : <strong>{{ record.dateRecord|format_date('full') }} </strong></p>
+            <div class="animal_part">
+                <div>
+                    <dl>Poids de {{ animal.name }} :</dl>
+                    <ol><strong>{{record.weight}}kg</strong></ol>
+                    <dl>Taille de {{ animal.name }} :</dl>
+                    <ol><strong>{{record.height}}cm</strong></ol>
+                </div>
+                <div>
+                    <dl>Informations concernant la santé de l'animal :</dl>
+                    <ol> <strong>{{ record.healthInfos }} </strong></ol>
+                    <dl>Informations autres : </dl>
+                    <ol><strong> {{ record.otherInfos }} </strong></ol>
+                </div>
+            </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <p class="title"><a class="btn btn-success" href="{{ path('app_animal')}}" role="button"> Revenir a vos animaux</a> </p>
+        </div>
+    </main>
+{% endblock %}

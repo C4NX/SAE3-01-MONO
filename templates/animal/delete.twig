@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ "Suppression de #{animal.name}" }}
+{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <h1>{{ "Suppression de #{animal.name}" }}</h1>
+        <p>Êtes-vous sûr(e) de vouloir supprimer cet Animal ?</p>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

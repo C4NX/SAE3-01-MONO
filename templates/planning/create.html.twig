@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Creation de planning
+{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <h1 class="text-center">Créer votre planning</h1>
+        {{ form_start(agenda_form) }}
+        {{ form_widget((agenda_form)) }}
+        <input class="btn btn-primary" type="submit" value="C'est bon !">
+        {{ form_end(agenda_form) }}
+        <p>Ce sont les informations de base, vous pouvez ensuite modifier par exemple par jour, ajouter des vacances et pauses dans la journée, etc...</p>
+    </div>
+{% endblock %}
+
+

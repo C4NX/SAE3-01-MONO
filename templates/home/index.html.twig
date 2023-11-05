@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Take'A'Vet - Home{% endblock %}
+
+{% block main %}
+    <div class="main-content col-row-responsive">
+        <section class="main-section">
+            <h1 class="main-content__title">Bienvenue sur <span>Take'A'Vet</span></h1>
+
+            <div id="carouselCaptions" class="carousel slide p-4">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="3"
+                            aria-label="Slide 4"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{ asset('media/cats/chat_2.jpg') }}" class="d-block w-100" alt="image">
+                        <div class="carousel-caption d-none d-md-block bg-black-opacity-80 rounded-3">
+                            <h5>Prendre des rendez-vous, simplement et a domicile !</h5>
+                            <p>Prendre des rendez-vous n'a jamais été aussi simple et facile. Plus besoin de perdre
+                                votre temps en téléphonant aux secrétariats ou en vous déplaçant physiquement jusqu'à un
+                                cabinet médical. Avec notre service, vous pouvez fixer un rendez-vous depuis le confort
+                                de votre domicile, à n'importe quel moment de la journée.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ asset('media/cats/chat_1.jpg') }}" class="d-block w-100" alt="image">
+                        <div class="carousel-caption d-none d-md-block bg-black-opacity-80 rounded-3">
+                            <h5>Poser vos questions !</h5>
+                            <p>Les vétérinaires et les utilisateurs de Take'A'Vet se feront un plaisir de vous
+                                répondre.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ asset('media/cats/chat_3.jpg') }}" class="d-block w-100" alt="image">
+                        <div class="carousel-caption d-none d-md-block bg-black-opacity-80 rounded-3">
+                            <h5>Gérer vos animaux et leurs vaccins chez vous !</h5>
+                            <p>Gérer la santé de vos animaux de compagnie n'a jamais été aussi simple. Vous pouvez
+                                désormais suivre les vaccinations, les rendez-vous médicaux et les traitements de vos
+                                animaux depuis chez vous, en quelques clics seulement.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ asset('media/cats/chat_4.jpg') }}" class="d-block w-100" alt="image">
+                        <div class="carousel-caption d-none d-md-block bg-black-opacity-80 rounded-3">
+                            <h5>Gérer vos photos</h5>
+                            <p>Vous pouvez également gérer votre propre profil en y ajoutant votre photo, ainsi que des
+                                photos de vos chats afin que les vétérinaires puissent les voir avant le
+                                rendez-vous.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            <p class="text-justify">
+                Bienvenue sur notre site de vétérinaire en ligne ! Nous sommes heureux de vous accueillir et de
+                vous
+                offrir une variété de services de soins pour animaux de compagnie. Nous avons conçu
+                notre
+                site de manière à ce qu'il soit facile à utiliser et sécurisé, afin que vous puissiez planifier
+                des
+                rendez-vous, suivre les progrès de votre animal de compagnie et poser des questions à nos
+                vétérinaires
+                en toute confiance. Nous sommes là pour vous aider à prendre soin de votre animal de compagnie
+                et à le
+                maintenir en bonne santé.
+            </p>
+
+            <p class="text-justify">
+                Nous sommes également actifs sur les réseaux sociaux et nous aimerions vous connecter avec nous!
+                Suivez-nous sur <a href="#">Facebook <i class="fa-brands fa-facebook"></i></a>, <a href="#">Instagram
+                    <i
+                            class="fa-brands fa-instagram"></i></a> et <a href="#">Twitter <i
+                            class="fa-brands fa-twitter"></i></a> pour
+                rester à jour sur nos derniers services, conseils de santé pour animaux de compagnie et
+                événements. Nous publions régulièrement du contenu intéressant et utile pour les propriétaires
+                d'animaux de compagnie, alors n'hésitez pas à nous suivre et à partager nos publications avec
+                vos amis et votre famille. Nous apprécions votre soutien et nous sommes heureux de vous offrir
+                une plateforme pour apprendre et échanger avec d'autres amoureux des animaux.
+            </p>
+            <hr>
+            <figure class="p-3" style="border: 1px solid; border-radius: 5px">
+                <p>
+                    Chers amis animaliers,
+                </p>
+                <p>
+                    Nous sommes heureux de vous accueillir sur notre site de prise de rendez-vous vétérinaire. Nous
+                    comprenons à quel point il est important de prendre soin de la santé de vos animaux de
+                    compagnie, car nous sommes également des amoureux des animaux.
+                    Chez nous, la vocation de prendre soin des animaux est plus qu'un simple métier, c'est notre
+                    passion. Nous avons tous des animaux chez nous et comprenons à quel point il est important de
+                    les choyer et de les aimer. C'est pour cela que nous nous engageons à vous offrir les meilleurs
+                    soins pour vos animaux, tout en étant à l'écoute de vos besoins.
+                    Notre objectif est de vous faciliter la prise de rendez-vous et de vous offrir un service de
+                    qualité pour la santé de vos animaux. Grâce à notre plateforme en ligne, vous pouvez planifier
+                    des rendez-vous à n'importe quel moment, consulter les disponibilités des professionnels de
+                    santé animal et suivre l'historique de santé de vos animaux.
+                    Nous sommes impatients de vous aider à prendre soin de vos animaux de compagnie et sommes à
+                    votre disposition pour toute question ou préoccupation.
+                </p>
+                <figcaption class="blockquote-footer">
+                    L'Equipe de <cite title="Service de vétérinaire en ligne Take'A'Vet">Take'A'Vet</cite>
+                </figcaption>
+            </figure>
+        </section>
+        <aside class="twitter-container">
+            <div class="main_buttons__list">
+                <a class="btn btn-outline-success" href="{{ path('app_appointments_take') }}">Prendre rendez-vous, chez vous <i
+                            class="fa-solid fa-house"></i></a>
+                <a class="btn btn-outline-success" href="{{ path('app_threads_form') }}">Poser une
+                    question <i class="fa-solid fa-question"></i></a>
+                <a class="btn btn-outline-success" href="{{ path('app_planning') }}">Consulter le
+                    planning des vétérinaires <i class="fa-solid fa-calendar-days"></i></a>
+            </div>
+            <a class="twitter-timeline" data-height="1200"
+               href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw">Loading Tweets... <i
+                        class="fa-brands fa-twitter"></i></a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </aside>
+    </div>
+{% endblock %}

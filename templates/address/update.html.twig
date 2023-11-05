@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition '{{ name }}'{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <h3 class="text-center">Edition de '{{ name }}'</h3>
+        {{ form_start(update_form) }}
+        {{ form_widget(update_form) }}
+        <input class="btn btn-primary" type="submit" value="Modifier">
+        <a class="btn btn-secondary" href="{{ path('app_address') }}">Retour</a>
+        {{ form_end(update_form) }}
+    </div>
+{% endblock %}

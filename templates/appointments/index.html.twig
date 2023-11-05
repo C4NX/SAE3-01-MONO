@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes rendez-vous !{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <h1 class="text-center">Mes rendez-vous</h1>
+
+        {% if appointments is not empty %}
+            <div class="appointment__list">
+                {% for appointment in appointments  %}
+                    <div class="appointment__item">
+                        <p>
+                            {% if appointment.isUrgent %}
+                                <span class="badge text-bg-warning">Urgent</span>
+                            {% endif %}
+                            {% if appointment.isCompleted %}
+                                <span class="badge text-bg-success">Fini</span>
+                            {% else %}
+                                {% if date() < date(appointment.dateApp) %}
+                                    <span class="badge text-bg-primary">Prévu</span>
+                                {% else %}
+                                    <span class="badge text-bg-light">En attente</span>
+                                {% endif %}
+                            {% endif %}
+                        </p>
+                        <h4>Rendez-vous du {{ appointment.dateApp|format_datetime('full', locale='fr') }} </h4>
+                        <div>
+                            <span>Notes :</span>
+                            <p class="appointment__notes">{{ appointment.note|default('Aucune note complémentaire n\'a été enregistrée pour ce rendez-vous.') }}</p>
+                        </div>
+                        <p>Vous avez pris rendez-vous pour une consultation à domicile avec notre vétérinaire expérimenté, le <strong>Dr {{ appointment.veto.lastName }} {{ appointment.veto.firstName }}</strong>. Le rendez-vous a été pris pour <strong>{{ appointment.type.duration }} minutes</strong>, <strong>{{ appointment.type.libTypeApp}}</strong> et se déroulera à l'addresse suivante, <strong>{{ appointment.address.ad }}, {{ appointment.address.city}}, {{ appointment.address.pc}} ({{ appointment.address.name }}) </strong>, afin de permettre à votre animal de recevoir les soins nécessaires dans un environnement familier. Notre vétérinaire se déplacera jusqu'à cette addresse avec tout le matériel nécessaire pour procéder à l'examen de votre.vos animal.aux et lui prodiguer les soins appropriés. N'hésitez pas à nous contacter si vous avez des questions ou des préoccupations avant le rendez-vous.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center">Vous n'avez pas encore pris de rendez-vous avec nous. Nous vous invitons à <a href="{{ path('app_planning') }}">consulter notre planning de disponibilité</a> en ligne pour trouver un créneau qui conviendrait à votre emploi du temps et à prendre rendez-vous en quelques clics.</p>
+        {% endif %}
+
+
+        <p class="text-center my-4">
+            <a class="btn btn-primary" href="{{ path('app_appointments_take') }}">Prendre un rendez-vous</a>
+        </p>
+    </div>
+{% endblock %}

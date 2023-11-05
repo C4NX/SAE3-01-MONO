@@ -1,0 +1,27 @@
+<footer class="p-4 border-top">
+    <div class="row align-content-center">
+        <div class="col-md-5 footer-left-block">
+            <a href="/" class="nav-link">
+                <img src="{{ asset('media/nav_logo.png') }}" width="50">
+                Take’A’Vet
+            </a>
+            <p class="text-secondary">Take’A’Vet est une application de gestion de rendez-vous pour vétérinaire.</p>
+        </div>
+
+        <div class="col-md-5 offset-md-1 mb-3">
+            <form>
+                <h5>S'inscrire à la newsletter</h5>
+                <p>Un condensé mensuel de nos nouveautés !</p>
+                <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                    <label for="newsletter1" class="visually-hidden">Email address</label>
+                    <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                    <button class="btn btn-primary" type="button">Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center py-4 my-4 border-top">
+        <p>&copy; Copyright {{ 'now' | date('Y') }}, All Rights Reserved by Take’A’Vet and SPLUG Software.</p>
+    </div>
+</footer>

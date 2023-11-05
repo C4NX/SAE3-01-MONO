@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Prendre un rendez-vous
+{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <div class="main-title">
+            <h1>Prendre un rendez-vous</h1>
+        </div>
+
+        <div>
+            {{ form_start(appointment_form) }}
+            {{ form_widget(appointment_form) }}
+            <input type="submit" value="Prendre le rendez-vous" class="btn btn-primary">
+            {{ form_end(appointment_form) }}
+        </div>
+    </div>
+{% endblock %}
+
